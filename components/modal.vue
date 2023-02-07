@@ -1,7 +1,7 @@
 <template >
 <teleport to="body">
-    <div class="modal" v-show="isVisible" @click="close">
-    <div class="modal-content" ><slot/>{{  isVisible }}</div>
+    <div class="modal" v-show="isVisible" @click.self="close">
+    <div class="modal-content"><slot/></div>
     </div>
 </teleport>
 </template>
