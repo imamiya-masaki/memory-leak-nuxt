@@ -5,7 +5,7 @@ function url() {
 
 async function action(page) {
   const rootPath = path.join(__dirname, '..')
-  const lightPath = path.join(rootPath, 'assets/middle.xlsx')
+  const lightPath = path.join(rootPath, 'assets/medium.xlsx')
   await page.click('#open-modal') // モーダルを開く
   try {
     const inputFile = await page.$('#input-file')
