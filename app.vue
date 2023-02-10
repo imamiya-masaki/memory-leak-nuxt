@@ -63,13 +63,13 @@ const onFileSelectChange = (e: Event) => {
 <template>
   <div>
     <modal :isVisible="isVisible" @close="closeEvent">
-      <input type="file" id="inputFile"  @change="onFileSelectChange"/>
+      <input type="file" id="input-file"  @change="onFileSelectChange"/>
       {{  why }}
     </modal>
-    <button @click="openEvent">
+    <button @click="openEvent" id="open-modal">
       モーダルを開く
     </button>
-    <button @click="clearworksheetRef">
+    <button @click="clearworksheetRef" id="clear">
       clearworksheetRef
     </button>
   </div>
