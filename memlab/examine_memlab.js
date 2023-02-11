@@ -3,6 +3,10 @@ function url() {
     return "http://localhost:3000/"
 }
 
+async function sleep(delay) {
+  return new Promise(resolve => setTimeout(resolve, delay));
+}
+
 async function action(page) {
   const rootPath = path.join(__dirname, '..')
   const lightPath = path.join(rootPath, 'assets/medium.xlsx')
@@ -14,11 +18,11 @@ async function action(page) {
   } catch (e) {
     console.log('e', e)
   }
+  await page.click('#close')
 }
 
 async function back(page) {
-  page.click('.modal')
-  page.click('#clear')
+  await page.click('#clear')
 }
 
 function leakFilter(node, _snapshot, _leakedNodeIds) {

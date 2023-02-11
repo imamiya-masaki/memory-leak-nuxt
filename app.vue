@@ -18,16 +18,14 @@ const openEvent = function () {
 
 const selectedFile = ref<ArrayBuffer | null>(null)
 
-const worksheetRef = ref<WorkSheet>()
+const worksheetRef = ref<WorkSheet | null>()
 
-const why = ref<string>("ready:0");
 
 const clearworksheetRef = function () {
-  worksheetRef.value = undefined;
-  why.value = "ready:" + String(Number(why.value.split(':')[1]) + 1);
-  if (document?.getElementById?.("inputFile")) {
-    (document?.getElementById?.("inputFile") as any).value = ""
-  }
+  worksheetRef.value = null;
+  // if (document?.getElementById?.("inputFile")) {
+  //   (document?.getElementById?.("inputFile") as any).value = ""
+  // }
   console.log('done: clearworksheetRef')
 }
 
@@ -41,7 +39,6 @@ const onFileSelectChange = (e: Event) => {
   reader.addEventListener("load", (e) => {
   const buffer = reader.result
   if (!buffer) {
-    console.log('none buffer', buffer)
     return
   }
   try {
@@ -49,9 +46,7 @@ const onFileSelectChange = (e: Event) => {
     const sheetName = workbook.SheetNames[0]
     const value = workbook.Sheets[sheetName]
     worksheetRef.value = value
-    why.value = "done:" + String(Number(why.value.split(':')[1]));
     console.log('done')
-    console.log('value', value)
   } catch(e) {
     console.log('workbook:err', e);
   }
@@ -64,7 +59,7 @@ const onFileSelectChange = (e: Event) => {
   <div>
     <modal :isVisible="isVisible" @close="closeEvent">
       <input type="file" id="input-file"  @change="onFileSelectChange"/>
-      {{  why }}
+      <button @click="closeEvent" id="close">閉じる</button>
     </modal>
     <button @click="openEvent" id="open-modal">
       モーダルを開く
